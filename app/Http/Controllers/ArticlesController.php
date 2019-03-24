@@ -19,8 +19,8 @@ class ArticlesController extends Controller
     {
         $articles = Article::paginate(5);
         return ArticleResources::collection($articles)->additional(['meta' => [
-            'version' => '1.0.0',
-            'API_base_url' => url('/'),
+            'version'           => '1.0.0',
+            'API_base_url'      => url('/'),
             'siapa yg ganteng?' => 'andi'
         ]]); //meta bisa ditambahkan
     }
