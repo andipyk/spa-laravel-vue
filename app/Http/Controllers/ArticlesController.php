@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+use App\Article;
+
+use App\Http\Resources\Article as ArticleResources;
+
+class ArticlesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,10 +17,15 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return 'test';
+        $articles = Article::paginate(5);
+        return ArticleResources::collection($articles)->additional(['meta' => [
+            'version' => '1.0.0',
+            'API_base_url' => url('/'),
+            'siapa yg ganteng?' => 'andi'
+        ]]); //meta bisa ditambahkan
     }
 
-    /**
+        /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
